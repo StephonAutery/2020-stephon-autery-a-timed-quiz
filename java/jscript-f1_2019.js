@@ -2,9 +2,9 @@
 var f1_2019 = [
     {
         fullTeamName: "Alfa Romeo Racing ORLEN",
-        base: "Hinwil, Switzerland",
         driverOne: "Kimi Raikkonen",
         driverTwo: "Antonio Giovinazzi",
+        base: "Hinwil, Switzerland",
         teamChief: "Frédéric Vasseur",
         firstTeamEntry: "1993",
         worldChampionships: "nope",

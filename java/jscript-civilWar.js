@@ -37,9 +37,9 @@ var questions = [
     },
     {
         q: "what is the pay gap between white men and women in the US",
-        a: "latin women: 58%",
-        b: "black women: 65%",
-        c: "white women: 82%",
+        a: "latin women earn 58% of what white men earn",
+        b: "black women earn 65% of what white men earn",
+        c: "white women earn 82% of what white men earn",
         ans: "all"
     }
 ]   

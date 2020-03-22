@@ -10,32 +10,45 @@ var answerP = document.createElement("p");
 console.log(clockStarted);
 console.log(questions.length);
 console.log(questions[1].c);
+console.log(" ------------ ");
 
 // put the next question on the screen
 function nextQuestion() {
-    console.log(qCountDown);
     theQuestion.textContent = "";
     theResult.textContent = "";
     qRemain.textContent = qCountDown;
-    // found this on stack overflow
+    console.log(qCountDown + " - qCountDown");
+    console.log(questions.length + " -- " + varCount);
     while (theAnswer.firstChild) {
         theAnswer.removeChild(theAnswer.lastChild);
     }
     if (qCountDown > 0) {
         getQuestion();
+    } else if (rightFoot === questions.length && varCount > 0) {
+        qCount = 0;
+        varCount = 0;
+        qCountDown = questions.length;
+        theResult.textContent = "you win!";
+        startButton.addEventListener("click", startTheClock);
+    }
+    else if (qCountDown < 0) {
+        qCount = 0;
+        varCount = 0;
+        qCountDown = questions.length;
+        theResult.textContent = "game over!";
+        startButton.addEventListener("click", startTheClock);
     }
 }
 
 // determine the users answer to the question
 function getAnswers(event) {
-    console.log(event.target);
+    // console.log(event.target);
     var dataAnswer = event.target.getAttribute("data-answer")
     var dataChoice = event.target.getAttribute("data-choice");
-    console.log(dataAnswer);
     if (dataChoice === dataAnswer || dataAnswer === "all") {
         theResult.textContent = "you are correct!";
         rightFoot++;
-        varCount = varCount + 5;
+        // varCount = varCount + 5;
         right.textContent = rightFoot;
         nextQuestion();
     } else {
@@ -45,13 +58,12 @@ function getAnswers(event) {
         wrong.textContent = wrongFoot;
         nextQuestion();
     }
-
 }
 
 // get the questions and answers from the object
 function getQuestion() {
     event.preventDefault;
-    console.log(qCount + " qCount - qetQuestion - top");
+    // console.log(qCount + " qCount - qetQuestion - top");
     var dataAnswer = questions[qCount].ans;
     theQuestion.textContent = questions[qCount].q;
     answerP = document.createElement("p");
@@ -66,7 +78,7 @@ function getQuestion() {
     answerP.id = "dump";
     answerP.innerHTML = '<button type="button" class="btn btn-primary btn-sm" data-choice="c" data-answer="' + dataAnswer + '"> ' + questions[qCount].c + ' </button>';
     theAnswer.append(answerP);
-    console.log(qCount + " qCount - qetQuestion - bottom");
+    // console.log(qCount + " qCount - qetQuestion - bottom");
     qCount++;
     qCountDown--;
 }
@@ -82,10 +94,15 @@ function startTheClock() {
             clockStarted = false;
         }
     }, 1000);
-    console.log("the clock? " + clockStarted);
     varCount = 60;
     startButton.removeEventListener("click", startTheClock);
+// -------------
+
+
+
+// -------------
 }
+
 
 startButton.addEventListener("click", startTheClock);
 theAnswer.addEventListener("click", function (event) {
