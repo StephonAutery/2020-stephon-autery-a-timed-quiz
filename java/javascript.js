@@ -45,7 +45,9 @@ var questions = [
     }
 ]
 
+// --------------------------------------------
 // set all pointers
+// --------------------------------------------
 var timeRemaining = document.getElementById("time-remaining");
 var theQuestion = document.getElementById("question");
 var theAnswer = document.getElementById("answer");
@@ -54,6 +56,7 @@ var right = document.getElementById("right");
 var wrong = document.getElementById("wrong");
 var qRemain = document.getElementById("remaining");
 var startButton = document.getElementById("start");
+var theMessage = document.getElementById("message");
 var answerP = document.createElement("p");
 var qCountDown = questions.length;
 var varCount = 50;
@@ -61,6 +64,7 @@ var qCount = 0;
 var rightFoot = 0;
 var wrongFoot = 0;
 var clockStarted = false;
+// --------------------------------------------
 
 console.log(clockStarted);
 console.log(questions.length);
@@ -69,15 +73,18 @@ console.log(" ------------ ");
 
 function gameOver() {
     theQuestion.textContent = "";
-    while (theAnswer.firstChild) {
-    theAnswer.removeChild(theAnswer.lastChild);
-    }
-    varCount = 0;
     timeRemaining.textContent = "";
-    theResult.textContent = "";
+    theMessage.innerHTML = "<hr><h3>you're a winner, let's have Tacos!</h3>";
+    theResult.innerHTML = '<hr><h4><p>right:&nbsp;' + rightFoot + '&nbsp;wrong:&nbsp;' + wrongFoot + '&nbsp;</p></h4>';
+    console.log(rightFoot + " <- ritghtFoot");
+    console.log(wrongFoot + " <- wrongFoot");
     qRemain.textContent = "";
     right.textContent = "";
     wrong.textContent = "";
+    while (theAnswer.firstChild) {
+        theAnswer.removeChild(theAnswer.lastChild);
+    }
+    varCount = 0;
     rightFoot = 0;
     wrongFoot = 0;
     varCount = 0;
@@ -92,36 +99,6 @@ function nextQuestion() {
         theAnswer.removeChild(theAnswer.lastChild);
     }
     getQuestion();
-
-    // var dataAnswer = questions[qCount].ans;
-    // theQuestion.textContent = questions[qCount].q;
-    // answerP = document.createElement("p");
-    // answerP.id = "dump";
-    // answerP.innerHTML = '<button type="button" class="btn btn-primary btn-sm" data-choice="a" data-answer="' + dataAnswer + '"> ' + questions[qCount].a + ' </button>';
-    // theAnswer.append(answerP);
-    // answerP = document.createElement("p");
-    // answerP.id = "dump";
-    // answerP.innerHTML = '<button type="button" class="btn btn-primary btn-sm" data-choice="b" data-answer="' + dataAnswer + '"> ' + questions[qCount].b + ' </button>';
-    // theAnswer.append(answerP);
-    // answerP = document.createElement("p");
-    // answerP.id = "dump";
-    // answerP.innerHTML = '<button type="button" class="btn btn-primary btn-sm" data-choice="c" data-answer="' + dataAnswer + '"> ' + questions[qCount].c + ' </button>';
-    // theAnswer.append(answerP);
-    // qCount++;
-    // qCountDown--;
-
-
-    // getQuestion();
-    // if (qCountDown > 0) {
-    //     getQuestion();
-    // } else if (rightFoot === questions.length && varCount > 0) {
-    //     theResult.textContent = "you win!";
-    //     gameOver();
-    // }
-    // else {
-    //     theResult.textContent = "game over!";
-    //     gameOver();
-    // }
 }
 
 // determine the users answer to the question
@@ -130,12 +107,12 @@ function getAnswers(event) {
     var dataAnswer = event.target.getAttribute("data-answer")
     var dataChoice = event.target.getAttribute("data-choice");
     if (dataChoice === dataAnswer || dataAnswer === "all") {
-        theResult.textContent = "you are correct!";
+        theResult.innerHTML = "<h3>you are correct!</h3>";
         qRemain.textContent = qCountDown;
         rightFoot++;
         right.textContent = rightFoot;
     } else {
-        theResult.textContent = "incorrect!";
+        theResult.innerHTML = "<h3>incorrect!</h3>";
         qRemain.textContent = qCountDown;
         wrongFoot++;
         wrong.textContent = wrongFoot;
@@ -144,7 +121,8 @@ function getAnswers(event) {
     qCount++;
     qCountDown--;
     if (qCountDown === 0) {
-        gameOver();
+        qCount = 0;
+        varCount = 0;
     }
     nextQuestion();
 }
@@ -152,10 +130,10 @@ function getAnswers(event) {
 // get the questions and answers from the object
 function getQuestion() {
     var dataAnswer = questions[qCount].ans;
-    theQuestion.textContent = questions[qCount].q;
+    theQuestion.innerHTML = '<hr><h5><p>&nbsp;' + questions[qCount].q; + '&nbsp;</p></h5>'
     answerP = document.createElement("p");
     answerP.id = "dump";
-    answerP.innerHTML = '<button type="button" class="btn btn-primary btn-sm" data-choice="a" data-answer="' + dataAnswer + '"> ' + questions[qCount].a + ' </button>';
+    answerP.innerHTML = '<hr><button type="button" class="btn btn-primary btn-sm" data-choice="a" data-answer="' + dataAnswer + '"> ' + questions[qCount].a + ' </button>';
     theAnswer.append(answerP);
     answerP = document.createElement("p");
     answerP.id = "dump";
@@ -170,10 +148,11 @@ function getQuestion() {
 // start the clock and set variables
 function theClock() {
     varCount = 50;
+    theResult.textContent = "";
+    theMessage.textContent = "";
     qCountDown = questions.length;
-    getQuestion();
-    console.log("clock started!");
     clockStarted = true;
+    getQuestion();
     var ticTok = setInterval(function (event) {
         timeRemaining.textContent = varCount;
         qRemain.textContent = qCountDown;
@@ -183,7 +162,6 @@ function theClock() {
             clockStarted = false;
             clearInterval(ticTok);
             gameOver();
-            console.log("clock stopped!");
         }
     }, 1000);
     startButton.removeEventListener("click", theClock);
