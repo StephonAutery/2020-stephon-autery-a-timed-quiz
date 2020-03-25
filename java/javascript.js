@@ -1,81 +1,19 @@
-
-// create the data objects
-var questions = [
-    {
-        q: "in what year did the US civil war begin?",
-        a: "1861",
-        b: "1865",
-        c: "2016",
-        ans: "a"
-    },
-    {
-        q: "what public office did Abraham Lincoln hold before becoming President?",
-        a: "senator",
-        b: "postal clerk",
-        c: "recorder",
-        ans: "a"
-    },
-    {
-        q: "who is Luke's father?",
-        a: "Darth Vader",
-        b: "Anakin Skywakler",
-        c: "Donald Trump",
-        ans: "a"
-    },
-    {
-        q: "what was the US slave population at the beginning of the US civil war?",
-        a: "20,000",
-        b: "5,000 but only in the south",
-        c: "12 million",
-        ans: "c"
-    },
-    {
-        q: "which amendment to the constitution of the United States abolished slavery in the United States?",
-        a: "the 2nd Amendment",
-        b: "the 13th Amendment",
-        c: "the 28th Amendment",
-        ans: "b"
-    },
-    {
-        q: "what is the pay gap between white men and women in the US",
-        a: "latin women earn 58% of what white men earn",
-        b: "black women earn 65% of what white men earn",
-        c: "white women earn 82% of what white men earn",
-        ans: "all"
-    }
-]
-
-// --------------------------------------------
-// set all pointers
-// --------------------------------------------
-var timeRemaining = document.getElementById("time-remaining");
-var theQuestion = document.getElementById("question");
-var theAnswer = document.getElementById("answer");
-var theResult = document.getElementById("result");
-var right = document.getElementById("right");
-var wrong = document.getElementById("wrong");
-var qRemain = document.getElementById("remaining");
-var startButton = document.getElementById("start");
-var theMessage = document.getElementById("message");
-var answerP = document.createElement("p");
-var qCountDown = questions.length;
-var varCount = 50;
-var qCount = 0;
-var rightFoot = 0;
-var wrongFoot = 0;
-var clockStarted = false;
-// --------------------------------------------
-
 console.log(clockStarted);
 console.log(questions.length);
 console.log(questions[3].c);
 console.log(" ------------ ");
 
+// --------------------------------------------
+// end the game, reset ever
+// --------------------------------------------
 function gameOver() {
+    if (rightFoot > wrongFoot) {
+        theMessage.innerHTML = "<hr><h3>you're a winner, let's have Tacos!</h3>";
+    
+    }    
     theQuestion.textContent = "";
     timeRemaining.textContent = "";
-    theMessage.innerHTML = "<hr><h3>you're a winner, let's have Tacos!</h3>";
-    theResult.innerHTML = '<hr><h4><p>right:&nbsp;' + rightFoot + '&nbsp;wrong:&nbsp;' + wrongFoot + '&nbsp;</p></h4>';
+    theResult.innerHTML = '<hr><p class="col-4">|&nbsp;right:&nbsp;' + rightFoot + '&nbsp;</p><p class="col-4">|&nbsp;wrong:&nbsp;' + wrongFoot + '&nbsp;</p><p class="col-4">|&nbsp;time remaining:&nbsp;' + varCount + '&nbsp;</p>';
     console.log(rightFoot + " <- ritghtFoot");
     console.log(wrongFoot + " <- wrongFoot");
     qRemain.textContent = "";
@@ -92,13 +30,13 @@ function gameOver() {
     qCountDown = questions.length;
     startButton.addEventListener("click", theClock);
 }
-// put the next question on the screen
+//  removes the current question from the screen
 function nextQuestion() {
-    theQuestion.textContent = "";
-    while (theAnswer.firstChild) {
-        theAnswer.removeChild(theAnswer.lastChild);
+    theQuestion.textContent = ""; // empty the text string for the question
+    while (theAnswer.firstChild) { // check to see if the div id=theAnswer still has kids
+        theAnswer.removeChild(theAnswer.lastChild); // if there's a kid keep remove it
     }
-    getQuestion();
+    getQuestion(); // get the next question
 }
 
 // determine the users answer to the question
@@ -108,7 +46,7 @@ function getAnswers(event) {
     var dataChoice = event.target.getAttribute("data-choice");
     if (dataChoice === dataAnswer || dataAnswer === "all") {
         theResult.innerHTML = "<h3>you are correct!</h3>";
-        qRemain.textContent = qCountDown;
+        qRemain.innerHTML = '<class="col text-danger">' + qCountDown; +  '...';
         rightFoot++;
         right.textContent = rightFoot;
     } else {
@@ -130,14 +68,14 @@ function getAnswers(event) {
 // get the questions and answers from the object
 function getQuestion() {
     var dataAnswer = questions[qCount].ans;
-    theQuestion.innerHTML = '<hr><h5><p>&nbsp;' + questions[qCount].q; + '&nbsp;</p></h5>'
+    theQuestion.innerHTML = '<hr><h5><p>' + questions[qCount].q; + '&nbsp;</p></h5>'
     answerP = document.createElement("p");
     answerP.id = "dump";
     answerP.innerHTML = '<hr><button type="button" class="btn btn-primary btn-sm" data-choice="a" data-answer="' + dataAnswer + '"> ' + questions[qCount].a + ' </button>';
     theAnswer.append(answerP);
     answerP = document.createElement("p");
     answerP.id = "dump";
-    answerP.innerHTML = '<button type="button" class="btn btn-primary btn-sm" data-choice="b" data-answer="' + dataAnswer + '"> ' + questions[qCount].b + ' </button>';
+    answerP.innerHTML = '<button type="button" class="text-wrap btn btn-primary btn-sm" data-choice="b" data-answer="' + dataAnswer + '"> ' + questions[qCount].b + ' </button>';
     theAnswer.append(answerP);
     answerP = document.createElement("p");
     answerP.id = "dump";
