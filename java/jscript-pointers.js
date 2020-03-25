@@ -16,4 +16,5 @@ var varCount = 50;
 var qCount = 0;
 var rightFoot = 0;
 var wrongFoot = 0;
+var yourScore = 0;
 var clockStarted = false;

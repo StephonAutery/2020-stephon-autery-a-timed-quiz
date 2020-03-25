@@ -9,19 +9,21 @@ console.log(" ------------ ");
 function gameOver() {
     if (rightFoot > wrongFoot) {
         theMessage.innerHTML = "<hr><h3>you're a winner, let's have Tacos!</h3>";
-    
-    }    
+    } else {
+        theMessage.innerHTML = "<hr><h3>better luck next time.</h3>"
+    }
+    $(".sometimes").hide();
+    $("#save-your-score").show();
     theQuestion.textContent = "";
     timeRemaining.textContent = "";
-    theResult.innerHTML = '<hr><p class="col-4">|&nbsp;right:&nbsp;' + rightFoot + '&nbsp;</p><p class="col-4">|&nbsp;wrong:&nbsp;' + wrongFoot + '&nbsp;</p><p class="col-4">|&nbsp;time remaining:&nbsp;' + varCount + '&nbsp;</p>';
-    console.log(rightFoot + " <- ritghtFoot");
-    console.log(wrongFoot + " <- wrongFoot");
+    theResult.innerHTML = '<hr><p class="col-4">|&nbsp;right:&nbsp;' + rightFoot + '&nbsp;</p><p class="col-4">|&nbsp;wrong:&nbsp;' + wrongFoot + '&nbsp;</p>';
     qRemain.textContent = "";
     right.textContent = "";
     wrong.textContent = "";
     while (theAnswer.firstChild) {
         theAnswer.removeChild(theAnswer.lastChild);
     }
+    yourScore = rightFoot;
     varCount = 0;
     rightFoot = 0;
     wrongFoot = 0;
@@ -86,6 +88,7 @@ function getQuestion() {
 // start the clock and set variables
 function theClock() {
     varCount = 50;
+    $(".sometimes").show();
     theResult.textContent = "";
     theMessage.textContent = "";
     qCountDown = questions.length;
@@ -104,6 +107,36 @@ function theClock() {
     }, 1000);
     startButton.removeEventListener("click", theClock);
 }
+
+// $("#myModal").on('hidden.bs.modal', function(event){
+//     event.preventDefault();
+//     console.log($("#initials").val());
+//     console.log(localStorage.getItem(name));    
+//     var initials = $("#initials").val();
+//     localStorage.setItem("name", initials);
+
+// });
+
+
+$("#myModal").on('hidden.bs.modal', function (event) {
+    event.preventDefault();
+    $("#save-score").on("click", function (event) {
+        var initials = $("#initials").val();
+        localStorage.setItem(initials, yourScore);
+    });
+});
+
+$("#myModal").on('hidden.bs.modal', function (event) {
+    event.preventDefault();
+    $("#clear-score").on("click", function (event) {
+        console.log(event.target);
+        localStorage.clear();
+    });
+});
+
+
+$(".sometimes").hide();
+$("#save-your-score").hide();
 
 startButton.addEventListener("click", theClock);
 

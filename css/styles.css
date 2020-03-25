@@ -5,5 +5,10 @@ body {
 main {
     width: 250px;
     display: inline-block;  
-    border: 1px dashed black;
+}
+#starts {
+    text-align: center;
+}
+#start {
+    display: inline-block;
 }

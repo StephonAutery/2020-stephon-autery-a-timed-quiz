@@ -1,42 +1,72 @@
-# 04 Web APIs: Code Quiz
+# a timed quiz
 
-As you proceed in your career as a web developer, you will probably be asked to complete a coding assessment, which is typically a combination of multiple-choice questions and interactive challenges. Build a timed code quiz with multiple-choice questions. This app will run in the browser and feature dynamically updated HTML and CSS powered by your JavaScript code. It will also feature a clean and polished user interface and be responsive, ensuring that it adapts to multiple screen sizes.
+css, javascript, bootstrap CDN and JQuery are used to create a quiz.
 
-## User Story
+## Site Picture
+![Site](/images/2020-ucb-03-password-generator-snip.PNG)
+
+## Technologies Used
+* [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+* [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+* [javaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+* [bootstrap cdn](https://bootstrap.com/introduction)
+- [GitLab](https://gitlab.com/) - version control system to track changes to source code
+- [GitHub](https://github.com/) - hosts repository that can be deployed to GitHub Pages
+
+## Summary 
+this application generates a random password based on the user's specifications.
+
+## Code Snippet
+where the work gets done.
+
+```javaScript
+
+// determine the users answer to the question
+function getAnswers(event) {
+    console.log(event.target);
+    var dataAnswer = event.target.getAttribute("data-answer")
+    var dataChoice = event.target.getAttribute("data-choice");
+    if (dataChoice === dataAnswer || dataAnswer === "all") {
+        theResult.innerHTML = "<h3>you are correct!</h3>";
+        qRemain.innerHTML = '<class="col text-danger">' + qCountDown; +  '...';
+        rightFoot++;
+        right.textContent = rightFoot;
+    } else {
+        theResult.innerHTML = "<h3>incorrect!</h3>";
+        qRemain.textContent = qCountDown;
+        wrongFoot++;
+        wrong.textContent = wrongFoot;
+        varCount = varCount - 10;
+    }
+    qCount++;
+    qCountDown--;
+    if (qCountDown === 0) {
+        qCount = 0;
+        varCount = 0;
+    }
+    nextQuestion();
+}
 
 ```
-AS A coding bootcamp student
-I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-SO THAT I can gauge my progress compared to my peers
-```
 
-## Acceptance Criteria
+## Deployed Link
 
-```
-GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and score
-```
+* [see live site](https://stephonautery.github.io/2020-ucb-03-javascript-password-generator/)
+* [github repository](https://github.com/StephonAutery/2020-ucb-03-javascript-password-generator)
 
-The following animation demonstrates the application functionality:
+## Authors
 
-![code quiz](./Assets/04-web-apis-homework-demo.gif)
+* **Stephon Autery** 
 
-### Review
+- [link to portfolio Site](https://github.com/StephonAutery)
+- [link to LinkedIn](https://www.linkedin.com/in/stephon-a-1bb575198/)
 
-You are required to submit the following for review:
+## License
 
-* The URL of the functional, deployed application.
+This project is in the public domain.
 
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
+images: copyright Stephon Autery
 
-- - -
-© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
+## Acknowledgments
+
+* UCBerkeley Coding Bootcamp is still Awesome!
