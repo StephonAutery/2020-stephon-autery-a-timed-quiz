@@ -3,7 +3,11 @@
 css, javascript, bootstrap CDN and JQuery are used to create a quiz.
 
 ## Site Picture
-![Site](/images/2020-ucb-03-password-generator-snip.PNG)
+![Site](/images/quiz-image-001.PNG)
+
+![Site](/images/quiz-image-002.PNG)
+
+![Site](/images/quiz-image-003.PNG)
 
 ## Technologies Used
 * [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
