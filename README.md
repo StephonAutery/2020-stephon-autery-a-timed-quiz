@@ -13,7 +13,7 @@ css, javascript, bootstrap CDN and JQuery are used to create a quiz.
 * [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
 * [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 * [javaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-* [bootstrap cdn](https://bootstrap.com/introduction)
+* [bootstrap cdn](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
 - [GitLab](https://gitlab.com/) - version control system to track changes to source code
 - [GitHub](https://github.com/) - hosts repository that can be deployed to GitHub Pages
 
